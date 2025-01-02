@@ -2,9 +2,9 @@ export const templates = [
   {
     id: 'template1',
     name: 'Your Template 1',
-    background: '/src/assets/empty_page_1.jpg',
+    background: '/assets/empty_page_1.jpg',
     font: 'Arial', 
-    preview: '/src/assets/empty_page_1.jpg'
+    preview: '/assets/empty_page_1.jpg'
   },
   {
     id: 'template2',
