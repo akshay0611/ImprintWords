@@ -7,6 +7,7 @@ import TextCustomizer from './TextCustomizer';
 import ShareModal from './ShareModal';
 import { templates } from '../data/templates';
 import { jsPDF } from 'jspdf';
+import Draggable from 'react-draggable';
 
 export default function QuoteEditor() {
   const [quote, setQuote] = useState<Quote>({
@@ -122,20 +123,27 @@ export default function QuoteEditor() {
               className="relative w-full aspect-[3/4] bg-cover bg-center p-12 flex items-center justify-center"
               style={{ backgroundImage: `url(${quote.background})` }}
             >
-              <div
-                className="relative z-10 w-full max-w-xl"
-                style={{
-                  fontFamily: quote.font,
-                  fontSize: `${quote.fontSize}px`,
-                  color: quote.color,
-                  textAlign: quote.alignment as 'left' | 'center' | 'right',
-                  fontWeight: quote.bold ? 'bold' : 'normal',
-                  fontStyle: quote.italic ? 'italic' : 'normal',
-                  textDecoration: quote.underline ? 'underline' : 'none'
-                }}
-              >
-                {quote.text}
-              </div>
+              <Draggable>
+                <div
+                  className="relative z-10 w-full max-w-xl"
+                  style={{
+                    fontFamily: quote.font,
+                    fontSize: `${quote.fontSize}px`,
+                    color: quote.color,
+                    textAlign: quote.alignment as 'left' | 'center' | 'right',
+                    fontWeight: quote.bold ? 'bold' : 'normal',
+                    fontStyle: quote.italic ? 'italic' : 'normal',
+                    textDecoration: quote.underline ? 'underline' : 'none',
+                    position: 'absolute',
+                    left: '5%',
+                    top: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    cursor: 'grab'
+                  }}
+                >
+                  {quote.text}
+                </div>
+              </Draggable>
               <div className="absolute inset-0 bg-black/10" />
             </div>
           </div>
