@@ -11,7 +11,12 @@ const fonts = [
   { name: 'Lora', category: 'Serif', style: 'Literary' },
   { name: 'Montserrat', category: 'Sans Serif', style: 'Contemporary' },
   { name: 'Crimson Text', category: 'Serif', style: 'Book Style' },
-  { name: 'Source Serif Pro', category: 'Serif', style: 'Academic' }
+  { name: 'Source Serif Pro', category: 'Serif', style: 'Academic' },
+  { name: 'Roboto', category: 'Sans Serif', style: 'Modern' },
+  { name: 'Oswald', category: 'Sans Serif', style: 'Bold' },
+  { name: 'Raleway', category: 'Sans Serif', style: 'Elegant' },
+  { name: 'Georgia', category: 'Serif', style: 'Classic' },
+  { name: 'Poppins', category: 'Sans Serif', style: 'Contemporary' }
 ];
 
 interface TextCustomizerProps {
