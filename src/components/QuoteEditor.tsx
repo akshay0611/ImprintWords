@@ -6,6 +6,7 @@ import TemplateSelector from './TemplateSelector';
 import TextCustomizer from './TextCustomizer';
 import ShareModal from './ShareModal';
 import { templates } from '../data/templates';
+import { jsPDF } from 'jspdf';
 
 export default function QuoteEditor() {
   const [quote, setQuote] = useState<Quote>({
@@ -20,12 +21,23 @@ export default function QuoteEditor() {
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [shareImageUrl, setShareImageUrl] = useState('');
   const quoteRef = useRef<HTMLDivElement>(null);
+  const [exportFormat, setExportFormat] = useState<'png' | 'jpeg' | 'pdf'>('png');
+  const [resolution, setResolution] = useState<'720p' | '1080p' | '4K'>('1080p');
 
   const handleDownload = async () => {
     if (quoteRef.current) {
       const dataUrl = await htmlToImage.toPng(quoteRef.current);
       const link = document.createElement('a');
-      link.download = 'custom-quote.png';
+      link.download = `custom-quote.${exportFormat}`;
+      
+      if (exportFormat === 'pdf') {
+        const pdf = new jsPDF();
+        const imgData = await htmlToImage.toPng(quoteRef.current);
+        pdf.addImage(imgData, 'PNG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+        pdf.save('custom-quote.pdf');
+        return;
+      }
+
       link.href = dataUrl;
       link.click();
     }
@@ -76,6 +88,16 @@ export default function QuoteEditor() {
             />
 
             <div className="flex space-x-4">
+              <select value={exportFormat} onChange={(e) => setExportFormat(e.target.value as 'png' | 'jpeg' | 'pdf')}>
+                <option value="png">PNG</option>
+                <option value="jpeg">JPEG</option>
+                <option value="pdf">PDF</option>
+              </select>
+              <select value={resolution} onChange={(e) => setResolution(e.target.value as '720p' | '1080p' | '4K')}>
+                <option value="720p">720p</option>
+                <option value="1080p">1080p</option>
+                <option value="4K">4K</option>
+              </select>
               <button
                 onClick={handleDownload}
                 className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
