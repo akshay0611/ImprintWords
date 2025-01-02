@@ -5,6 +5,9 @@ export interface Quote {
   color: string;
   alignment: 'left' | 'center' | 'right';
   background: string;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
 }
 
 export interface Template {

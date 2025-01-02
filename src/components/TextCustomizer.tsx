@@ -110,6 +110,31 @@ export default function TextCustomizer({ quote, onChange }: TextCustomizerProps)
           </button>
         </div>
       </div>
+
+      {/* Text Style Options */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Text Style</label>
+        <div className="flex space-x-2">
+          <button
+            onClick={() => onChange({ bold: !quote.bold })}
+            className={`p-2 rounded ${quote.bold ? 'bg-indigo-100 text-indigo-600' : 'text-gray-600 hover:bg-gray-100'}`}
+          >
+            B
+          </button>
+          <button
+            onClick={() => onChange({ italic: !quote.italic })}
+            className={`p-2 rounded ${quote.italic ? 'bg-indigo-100 text-indigo-600' : 'text-gray-600 hover:bg-gray-100'}`}
+          >
+            I
+          </button>
+          <button
+            onClick={() => onChange({ underline: !quote.underline })}
+            className={`p-2 rounded ${quote.underline ? 'bg-indigo-100 text-indigo-600' : 'text-gray-600 hover:bg-gray-100'}`}
+          >
+            U
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

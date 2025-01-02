@@ -128,7 +128,10 @@ export default function QuoteEditor() {
                   fontFamily: quote.font,
                   fontSize: `${quote.fontSize}px`,
                   color: quote.color,
-                  textAlign: quote.alignment as 'left' | 'center' | 'right'
+                  textAlign: quote.alignment as 'left' | 'center' | 'right',
+                  fontWeight: quote.bold ? 'bold' : 'normal',
+                  fontStyle: quote.italic ? 'italic' : 'normal',
+                  textDecoration: quote.underline ? 'underline' : 'none'
                 }}
               >
                 {quote.text}
