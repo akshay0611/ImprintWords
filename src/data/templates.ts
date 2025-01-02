@@ -3,7 +3,7 @@ import template2Background from '../assets/empty_page_2.jpg';
 import template3Background from '../assets/empty_page_3.jpg';
 import template4Background from '../assets/empty_page_4.jpg';
 import template5Background from '../assets/empty_page_5.jpg';
-import template6Background from '../assets/empty_page_6.jpg';
+import template6Background from '../assets/empty_page_6.jpg'; 
 
 
 export const templates = [
