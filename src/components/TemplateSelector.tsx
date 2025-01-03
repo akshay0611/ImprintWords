@@ -13,7 +13,7 @@ export default function TemplateSelector({ onSelect, onCustomImageSelect, select
   return (
     <div className="space-y-6">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Background Template</label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Select a Page template:</label>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           {templates.map((template) => (
             <button
