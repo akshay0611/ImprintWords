@@ -21,7 +21,7 @@ export default function TemplateSelector({ onSelect, onCustomImageSelect, select
               onClick={() => onSelect(template)}
               className={`relative aspect-[4/3] overflow-hidden rounded-lg transition-all ${
                 selectedId === template.id ? 'ring-2 ring-indigo-500' : ''
-              }`}
+              } hover:scale-105 hover:shadow-lg hover:ring-2 hover:ring-indigo-500`}
             >
               <img
                 src={template.preview}
