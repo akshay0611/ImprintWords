@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AlignLeft, AlignCenter, AlignRight, Settings } from 'lucide-react';
+import { AlignLeft, AlignCenter, AlignRight, Settings, X } from 'lucide-react'; // Import the Close (X) icon
 import type { Quote } from '../types';
 import ColorPicker from './ColorPicker';
 
@@ -26,6 +26,7 @@ interface TextCustomizerProps {
 
 export default function TextCustomizer({ quote, onChange }: TextCustomizerProps) {
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showModal, setShowModal] = useState(false); // State to toggle modal visibility
 
   return (
     <div className="space-y-6">
@@ -33,7 +34,7 @@ export default function TextCustomizer({ quote, onChange }: TextCustomizerProps)
       <div className="flex justify-end">
         {/* Generate with AI Button */}
         <button
-          onClick={() => {/* Add your AI generation logic here */}}
+          onClick={() => setShowModal(true)} // Open modal when clicked
           className="mt-4 p-2 bg-purple-600 text-white rounded flex items-center"
         >
           Generate with AI
@@ -161,6 +162,44 @@ export default function TextCustomizer({ quote, onChange }: TextCustomizerProps)
             </div>
           </div>
         </>
+      )}
+
+      {/* AI Modal */}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded-lg w-[600px] h-[500px]"> {/* Increased modal width and height */}
+            {/* Modal Header with Close Icon */}
+            <div className="flex justify-between items-center">
+              <h3 className="text-lg font-semibold">Generate with AI</h3>
+              <button onClick={() => setShowModal(false)} className="text-gray-500 hover:text-gray-800">
+                <X className="w-6 h-6" /> {/* Close Icon */}
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <p className="mt-2 text-sm text-gray-600">
+              Can't think of a quote? We'll do the magic for you.
+            </p>
+
+            {/* Additional Context Input */}
+            <div className="mt-4">
+              <label className="block text-sm font-medium text-gray-700">Add description</label>
+              <textarea
+                placeholder="Give some additional context on what you want out of the quote/story. What is the scenario? Who is the quote/story for?"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                rows={4}
+              />
+            </div>
+
+            {/* Generate Button */}
+            <button
+              onClick={() => {/* Add AI generation logic here */}}
+              className="mt-4 w-full p-2 bg-purple-600 text-white rounded"
+            >
+              Generate with AI
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
