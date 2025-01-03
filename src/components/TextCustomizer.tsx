@@ -29,6 +29,17 @@ export default function TextCustomizer({ quote, onChange }: TextCustomizerProps)
 
   return (
     <div className="space-y-6">
+      {/* Button Container */}
+      <div className="flex justify-end">
+        {/* Generate with AI Button */}
+        <button
+          onClick={() => {/* Add your AI generation logic here */}}
+          className="mt-4 p-2 bg-purple-600 text-white rounded flex items-center"
+        >
+          Generate with AI
+        </button>
+      </div>
+
       {/* Text Input */}
       <div>
         <label className="block text-sm font-medium text-gray-700">Quote Text</label>
