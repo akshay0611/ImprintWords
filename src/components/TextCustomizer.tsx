@@ -167,7 +167,7 @@ export default function TextCustomizer({ quote, onChange }: TextCustomizerProps)
       {/* AI Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
-          <div className="bg-white p-8 rounded-lg w-[600px] h-[500px]"> {/* Increased modal width and height */}
+          <div className="bg-white p-8 rounded-lg w-[600px] h-[300px]"> {/* Increased modal width and height */}
             {/* Modal Header with Close Icon */}
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-semibold">Generate with AI</h3>
@@ -185,7 +185,7 @@ export default function TextCustomizer({ quote, onChange }: TextCustomizerProps)
             <div className="mt-4">
               <label className="block text-sm font-medium text-gray-700">Add description</label>
               <textarea
-                placeholder="Give some additional context on what you want out of the quote/story. What is the scenario? Who is the quote/story for?"
+                placeholder="Give some additional context on what you want out of the quote. What is the scenario? Who is the quote for?"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                 rows={4}
               />
