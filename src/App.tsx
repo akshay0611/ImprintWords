@@ -20,7 +20,7 @@ function App() {
               <header className="bg-white shadow">
                 <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                   <div className="flex items-center">
-                    <FontAwesomeIcon icon={faPencilAlt} className="mr-2" />
+                    <FontAwesomeIcon icon={faPencilAlt} className="mr-2" style={{ color: '#14b8a6' }} />
                     <h1 className="text-3xl font-bold text-gray-900">ImprintWords</h1>
                   </div>
                 </div>
