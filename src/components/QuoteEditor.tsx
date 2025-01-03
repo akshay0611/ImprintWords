@@ -103,7 +103,9 @@ export default function QuoteEditor() {
                     left: '5%',
                     top: '50%',
                     transform: 'translate(-50%, -50%)',
-                    cursor: 'grab'
+                    cursor: 'grab',
+                    whiteSpace: 'pre-wrap',
+                    wordWrap: 'break-word'
                   }}
                 >
                   {quote.text}
