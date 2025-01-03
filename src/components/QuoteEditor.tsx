@@ -76,7 +76,7 @@ export default function QuoteEditor() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Editor Controls */}
-          <div className="bg-white rounded-lg shadow-lg p-6 space-y-8">
+          <div className="bg-white rounded-lg shadow-lg p-6 space-y-8 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 200px)' }}>
             <TextCustomizer
               quote={quote}
               onChange={handleQuoteUpdate}
@@ -118,6 +118,7 @@ export default function QuoteEditor() {
 
           {/* Preview */}
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <h2 className="text-lg font-semibold p-4">Preview</h2>
             <div
               ref={quoteRef}
               className="relative w-full aspect-[3/4] bg-cover bg-center p-12 flex items-center justify-center"
