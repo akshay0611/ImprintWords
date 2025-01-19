@@ -2,7 +2,9 @@
 
 **ImprintWords** is a user-friendly web application that allows users to design customized quotes or text over visually appealing background templates. 🌟 Perfect for creating social media posts, personalized messages, or inspirational posters. 💬🎨
 
----
+<p align="center">
+  <img src="src/assets/Imprintwords.png" alt="Heal Well" width="900"/>
+</p>
 
 ## 🚀 Features
 
