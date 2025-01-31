@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPencilAlt, faMagic, faShare, faLightbulb } from "@fortawesome/free-solid-svg-icons"
 import { faGithub, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons"
+import { Pencil, Paintbrush, Edit, Type, Quote, ImageIcon } from "lucide-react"
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate()
@@ -54,35 +55,40 @@ const HomePage: React.FC = () => {
       </header>
 
       {/* Hero Section */}
-      <section
-        className="w-full bg-cover bg-center text-center py-40 relative overflow-hidden"
-        style={{
-          backgroundImage:
-            "url('https://img.freepik.com/free-photo/composition-pencils_23-2147986592.jpg?t=st=1737771152~exp=1737774752~hmac=979f2e949f5afa9f3c998086db1507fbc3a681a3e6926d2684fb43f14821b0f2&w=1800')",
-        }}
-      >
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight animate-fade-in-down">
-            Transform Your Ideas into{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
-              Masterpieces
-            </span>
-          </h2>
-          <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto animate-fade-in-up">
-            Create stunning quotes that resonate with your audience, designed to captivate and inspire. Perfect for
-            sharing or cherishing forever!
-          </p>
-          <button
-            className="bg-gradient-to-r from-teal-500 to-blue-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 animate-pulse"
-            onClick={() => navigate("/app")}
-          >
-            Get Started for Free
-          </button>
-        </div>
-      </section>
+      <section className="w-full py-20 relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
+      <div className="absolute inset-0 opacity-10">
+        {[Pencil, Paintbrush, Edit, Type, Quote, ImageIcon].map((Icon, index) => (
+          <Icon
+            key={index}
+            size={48}
+            className="absolute text-white"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              transform: `rotate(${Math.random() * 360}deg)`,
+            }}
+          />
+        ))}
+      </div>
+      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+        <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight animate-fade-in-down">
+          Transform Your Ideas into{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">Masterpieces</span>
+        </h2>
+        <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto animate-fade-in-up">
+          Create stunning quotes that resonate with your audience, designed to captivate and inspire. Perfect for
+          sharing or cherishing forever!
+        </p>
+        <button
+          className="bg-gradient-to-r from-teal-500 to-blue-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 animate-pulse"
+          onClick={() => navigate("/app")}
+        >
+          Get Started for Free
+        </button>
+      </div>
+    </section>
 
-      {/* About Section */}
+    {/* About Section */}
       <section id="about" className="py-24 bg-gray-50">
         <div className="container mx-auto text-center px-6 max-w-6xl">
           <h3 className="text-4xl font-bold text-gray-800 mb-8 animate-fade-in-down">About ImprintWords</h3>
