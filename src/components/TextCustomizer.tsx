@@ -3,6 +3,7 @@ import { AlignLeft, AlignCenter, AlignRight, Settings, X, Wand2 } from 'lucide-r
 import type { Quote } from '../types';
 import ColorPicker from './ColorPicker';
 import { motion, AnimatePresence } from 'framer-motion';
+import { generateQuote } from '../utils/gemini'; // Import your AI function here
 
 const fonts = [
   { name: 'Playfair Display', category: 'Serif', style: 'Classic' },
@@ -28,6 +29,22 @@ interface TextCustomizerProps {
 export default function TextCustomizer({ quote, onChange }: TextCustomizerProps) {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [generatedQuote, setGeneratedQuote] = useState('');
+
+  const handleGenerateQuote = async () => {
+    try {
+      setLoading(true);
+      const prompt = `Create an inspiring quote about: ${quote.text}`;
+      const result = await generateQuote(prompt);
+      setGeneratedQuote(result); // Set the generated quote to the state
+      onChange({ text: result }); // Update the quote with the generated content
+    } catch (error) {
+      console.error("Error generating quote:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="space-y-6 p-6 bg-gray-50 rounded-lg shadow-md">
@@ -201,11 +218,14 @@ export default function TextCustomizer({ quote, onChange }: TextCustomizerProps)
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => {/* Add AI generation logic here */}}
+                onClick={handleGenerateQuote}
                 className="mt-6 w-full px-4 py-2 bg-purple-600 text-white rounded-md shadow-md hover:bg-purple-700 transition-colors duration-200"
               >
-                Generate with AI
+                {loading ? 'Generating...' : 'Generate with AI'}
               </motion.button>
+              {generatedQuote && (
+                <p className="mt-4 text-sm text-gray-600">Generated Quote: {generatedQuote}</p>
+              )}
             </motion.div>
           </motion.div>
         )}
