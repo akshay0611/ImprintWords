@@ -13,12 +13,13 @@ export default function ShareModal({ imageUrl, onClose }: ShareModalProps) {
   };
 
   const handleShareToTwitter = () => {
-    const text = "✨ Just created this stunning design with ImprintWords! 🎨💬 Design your own custom quotes and posters effortlessly. Try it now: https://imprint-words.vercel.app/"; // Customize the tweet text here
+    const text =
+      "✨ Just created this stunning design with ImprintWords! 🎨💬 Design your own custom quotes and posters effortlessly. Try it now: https://imprint-words.vercel.app/";
     shareToTwitter(imageUrl, text);
   };
 
   const handleShareToInstagram = () => {
-    shareToInstagram();
+    shareToInstagram(imageUrl); // Pass the imageUrl to shareToInstagram
   };
 
   return (
