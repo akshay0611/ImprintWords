@@ -16,8 +16,10 @@ export default function QuoteEditor() {
     fontSize: 24,
     color: '#1a1a1a',
     alignment: 'center',
-    background: templates[0].background
+    background: templates[0].background,
   });
+
+  const [attribution, setAttribution] = useState<string>(''); // State for attribution
 
   const quoteRef = useRef<HTMLDivElement>(null);
 
@@ -26,29 +28,30 @@ export default function QuoteEditor() {
       const dataUrl = await htmlToImage.toPng(quoteRef.current);
       const link = document.createElement('a');
       link.download = `custom-quote.png`;
-      
       link.href = dataUrl;
       link.click();
     }
   };
 
   const handleTemplateSelect = (template: typeof templates[0]) => {
-    setQuote(prev => ({
+    setQuote((prev) => ({
       ...prev,
       background: template.background,
-      font: template.font
+      font: template.font,
     }));
+    setAttribution(''); // Clear attribution when a template is selected
   };
 
-  const handleCustomImageSelect = (imageUrl: string) => {
-    setQuote(prev => ({
+  const handleCustomImageSelect = (imageUrl: string, attributionText?: string) => {
+    setQuote((prev) => ({
       ...prev,
-      background: imageUrl
+      background: imageUrl,
     }));
+    setAttribution(attributionText || ''); // Set attribution for stock photos
   };
 
   const handleQuoteUpdate = (updates: Partial<Quote>) => {
-    setQuote(prev => ({ ...prev, ...updates }));
+    setQuote((prev) => ({ ...prev, ...updates }));
   };
 
   return (
@@ -57,15 +60,12 @@ export default function QuoteEditor() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Editor Controls */}
           <div className="bg-white rounded-2xl shadow-xl p-8 space-y-8 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 100px)' }}>
-            <TextCustomizer
-              quote={quote}
-              onChange={handleQuoteUpdate}
-            />
+            <TextCustomizer quote={quote} onChange={handleQuoteUpdate} />
 
             <TemplateSelector
               onSelect={handleTemplateSelect}
               onCustomImageSelect={handleCustomImageSelect}
-              selectedId={templates.find(t => t.background === quote.background)?.id || ''}
+              selectedId={templates.find((t) => t.background === quote.background)?.id || ''}
             />
           </div>
 
@@ -105,12 +105,18 @@ export default function QuoteEditor() {
                       transform: 'translate(-50%, -50%)',
                       cursor: 'grab',
                       whiteSpace: 'pre-wrap',
-                      wordWrap: 'break-word'
+                      wordWrap: 'break-word',
                     }}
                   >
                     {quote.text}
                   </div>
                 </Draggable>
+                {/* Attribution */}
+                {attribution && (
+                  <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
+                    {attribution}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -119,4 +125,3 @@ export default function QuoteEditor() {
     </div>
   );
 }
-
