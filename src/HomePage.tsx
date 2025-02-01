@@ -43,12 +43,15 @@ const HomePage: React.FC = () => {
         {/* Header */}
         <header className="bg-white shadow-lg w-full sticky top-0 z-50 transition-all duration-300 ease-in-out">
           <div className="container mx-auto flex items-center justify-between py-4 px-6 max-w-6xl">
-            <h1 className="text-3xl font-extrabold text-gray-800 flex items-center">
-              <FontAwesomeIcon icon={faPencilAlt} className="text-teal-500 mr-2" />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-blue-600">
-                ImprintWords
-              </span>
-            </h1>
+          <h1 className="text-3xl font-extrabold text-gray-800 flex items-center">
+      <FontAwesomeIcon icon={faPencilAlt} className="text-teal-500 mr-2" />
+      <span
+        className="bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-blue-600 cursor-pointer"
+        onClick={() => navigate("/")}
+      >
+        ImprintWords
+      </span>
+    </h1>
             <nav className="hidden md:block">
               <ul className="flex space-x-8 text-gray-700">
                 <li>
