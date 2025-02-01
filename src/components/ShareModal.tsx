@@ -1,64 +1,56 @@
+// src/components/ShareModal.tsx
 import React from 'react';
-import { Twitter, Facebook, Linkedin, X } from 'lucide-react';
-import { generateShareUrl, openShareWindow, SocialPlatform } from '../utils/sharing';
+import { shareToFacebook, shareToTwitter, shareToInstagram } from '../utils/sharing';
 
 interface ShareModalProps {
-  isOpen: boolean;
-  onClose: () => void;
   imageUrl: string;
-  quote: string;
+  onClose: () => void;
 }
 
-export default function ShareModal({ isOpen, onClose, imageUrl, quote }: ShareModalProps) {
-  if (!isOpen) return null;
+export default function ShareModal({ imageUrl, onClose }: ShareModalProps) {
+  const handleShareToFacebook = () => {
+    shareToFacebook(imageUrl);
+  };
 
-  const handleShare = (platform: SocialPlatform) => {
-    const url = generateShareUrl(platform, imageUrl, quote);
-    openShareWindow(url);
+  const handleShareToTwitter = () => {
+    const text = "✨ Just created this stunning design with ImprintWords! 🎨💬 Design your own custom quotes and posters effortlessly. Try it now: https://imprint-words.vercel.app/"; // Customize the tweet text here
+    shareToTwitter(imageUrl, text);
+  };
+
+  const handleShareToInstagram = () => {
+    shareToInstagram();
   };
 
   return (
-    <div 
-      role="dialog" 
-      aria-hidden={!isOpen}
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-    >
-      <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">Share Quote</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-lg p-6 w-full max-w-md">
+        <h2 className="text-xl font-bold mb-4">Share to Social Media</h2>
         <div className="space-y-4">
           <button
-            onClick={() => handleShare('twitter')}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#1DA1F2] text-white rounded-lg hover:bg-[#1a8cd8] transition-colors"
+            onClick={handleShareToFacebook}
+            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
-            <Twitter className="w-5 h-5" />
-            Share on Twitter
-          </button>
-
-          <button
-            onClick={() => handleShare('facebook')}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#1877F2] text-white rounded-lg hover:bg-[#166fe5] transition-colors"
-          >
-            <Facebook className="w-5 h-5" />
             Share on Facebook
           </button>
-
           <button
-            onClick={() => handleShare('linkedin')}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#0A66C2] text-white rounded-lg hover:bg-[#0958a8] transition-colors"
+            onClick={handleShareToTwitter}
+            className="w-full px-4 py-2 bg-blue-400 text-white rounded-lg hover:bg-blue-500"
           >
-            <Linkedin className="w-5 h-5" />
-            Share on LinkedIn
+            Share on Twitter
+          </button>
+          <button
+            onClick={handleShareToInstagram}
+            className="w-full px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700"
+          >
+            Share on Instagram
           </button>
         </div>
+        <button
+          onClick={onClose}
+          className="mt-4 w-full px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200"
+        >
+          Close
+        </button>
       </div>
     </div>
   );

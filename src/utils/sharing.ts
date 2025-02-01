@@ -1,39 +1,31 @@
-export type SocialPlatform = 'twitter' | 'facebook' | 'linkedin';
+// src/utils/sharing.ts
+export const shareToFacebook = (url: string) => {
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+};
 
-export function generateShareUrl(platform: SocialPlatform, imageUrl: string, quote: string): string {
-  const encodedQuote = encodeURIComponent(quote);
-  const encodedUrl = encodeURIComponent(imageUrl);
+export const shareToTwitter = async (url: string, text: string = '') => {
+  // Step 1: Open Twitter's tweet composer with pre-filled text
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
 
-  switch (platform) {
-    case 'twitter':
-      return `https://twitter.com/intent/tweet?text=${encodedQuote}&url=${encodedUrl}`;
-    case 'facebook':
-      return `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-    case 'linkedin':
-      return `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
-    default:
-      throw new Error('Unsupported platform');
+  try {
+    // Step 2: Download the image
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Failed to download image');
+
+    const blob = await response.blob();
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'image.png'; // Set the file name
+    link.click();
+
+    // Step 3: Show instructions
+    alert('The image has been downloaded. Please attach it to your tweet manually.');
+  } catch (error) {
+    console.error('Error downloading image:', error);
+    alert('Failed to download the image. Please try again.');
   }
-}
+};
 
-export function openShareWindow(url: string): void {
-  if (!url || url.trim() === '') {
-    console.error('Invalid URL provided to openShareWindow:', url);
-    return;
-  }
-
-  const width = 550;
-  const height = 400;
-  const left = (window.innerWidth - width) / 2;
-  const top = (window.innerHeight - height) / 2;
-
-  const newWindow = window.open(
-    url,
-    'share',
-    `width=${width},height=${height},left=${left},top=${top},toolbar=0,status=0`
-  );
-
-  if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-    console.error('Popup blocked or failed to open the sharing window.');
-  }
-}
+export const shareToInstagram = () => {
+  alert('Download the image and share it on Instagram manually.');
+};

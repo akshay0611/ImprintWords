@@ -1,9 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { Download } from 'lucide-react';
+import { Download, Share } from 'lucide-react'; // Import Share icon
 import * as htmlToImage from 'html-to-image';
 import type { Quote } from '../types';
 import TemplateSelector from './TemplateSelector';
 import TextCustomizer from './TextCustomizer';
+import ShareModal from './ShareModal'; // Import ShareModal
+import { uploadImage } from '../utils/uploadImage'; // Import the upload function
 
 import { templates } from '../data/templates';
 
@@ -20,6 +22,8 @@ export default function QuoteEditor() {
   });
 
   const [attribution, setAttribution] = useState<string>(''); // State for attribution
+  const [showShareModal, setShowShareModal] = useState(false); // State for ShareModal
+  const [imageUrl, setImageUrl] = useState<string>(''); // State for generated image URL
 
   const quoteRef = useRef<HTMLDivElement>(null);
 
@@ -30,6 +34,22 @@ export default function QuoteEditor() {
       link.download = `custom-quote.png`;
       link.href = dataUrl;
       link.click();
+    }
+  };
+
+  const handleShare = async () => {
+    if (quoteRef.current) {
+      const dataUrl = await htmlToImage.toPng(quoteRef.current);
+  
+      try {
+        // Upload the image to Cloudinary
+        const imageUrl = await uploadImage(dataUrl);
+        setImageUrl(imageUrl); // Set the uploaded image URL
+        setShowShareModal(true); // Open the ShareModal
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        alert('Failed to upload image. Please try again.');
+      }
     }
   };
 
@@ -73,13 +93,22 @@ export default function QuoteEditor() {
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
               <h2 className="text-2xl font-bold text-gray-800">Preview</h2>
-              <button
-                onClick={handleDownload}
-                className="flex items-center justify-center px-6 py-3 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
-              >
-                <Download className="w-5 h-5 mr-2" />
-                Download
-              </button>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={handleDownload}
+                  className="flex items-center justify-center px-6 py-3 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
+                >
+                  <Download className="w-5 h-5 mr-2" />
+                  Download
+                </button>
+                <button
+                  onClick={handleShare}
+                  className="flex items-center justify-center px-6 py-3 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 transition-colors duration-200"
+                >
+                  <Share className="w-5 h-5 mr-2" />
+                  Share
+                </button>
+              </div>
             </div>
             <div className="p-8">
               <div
@@ -122,6 +151,14 @@ export default function QuoteEditor() {
           </div>
         </div>
       </div>
+
+      {/* Share Modal */}
+      {showShareModal && (
+        <ShareModal
+          imageUrl={imageUrl}
+          onClose={() => setShowShareModal(false)}
+        />
+      )}
     </div>
   );
 }
