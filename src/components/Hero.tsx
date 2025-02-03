@@ -23,25 +23,25 @@ const Hero: React.FC = () => {
         ))}
       </div>
 
-     {/* Hero Content */}
-<div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-  <h2 className="text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight animate-fade-in-down">
-    Welcome,{" "}
-    <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-blue-500 to-purple-600 animate-gradient-x">
-      Sonam!
-    </span>{" "}
-    Let's Transform Your Ideas into Masterpieces
-  </h2>
-  <p className="text-2xl text-gray-300 mb-12 max-w-3xl mx-auto animate-fade-in-up">
-    This special edition is just for you, Sonam! Dive into a creative space where every quote is designed to inspire, captivate, and leave a lasting impression. Enjoy this exclusive welcome on our website!
-  </p>
-  <button
-    className="bg-gradient-to-r from-teal-500 to-blue-600 text-white text-xl font-bold py-4 px-10 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 animate-pulse hover:animate-none"
-    onClick={() => navigate("/app")}
-  >
-    Explore Your Special Experience
-  </button>
-</div>
+ {/* Hero Content */}
+ <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        <h2 className="text-6xl md:text-7xl font-extrabold text-white mb-8 leading-tight animate-fade-in-down">
+          Transform Your Ideas into{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-blue-500 to-purple-600 animate-gradient-x">
+            Masterpieces
+          </span>
+        </h2>
+        <p className="text-2xl text-gray-300 mb-12 max-w-3xl mx-auto animate-fade-in-up">
+          Create stunning quotes that resonate with your audience, designed to captivate and inspire. Perfect for sharing
+          or cherishing forever!
+        </p>
+        <button
+          className="bg-gradient-to-r from-teal-500 to-blue-600 text-white text-xl font-bold py-4 px-10 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 animate-pulse hover:animate-none"
+          onClick={() => navigate("/app")}
+        >
+          Get Started for Free
+        </button>
+      </div>
 
 
       {/* Gradient Overlay at Bottom */}
