@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faLinkedin, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
   return (
@@ -33,12 +33,12 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-400 mb-6 md:mb-0">© 2025 ImprintWords. All rights reserved.</p>
           <div className="flex gap-8">
-            <a href="https://github.com/akshay0611" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            {/* <a href="https://github.com/akshay0611" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <FontAwesomeIcon
                 icon={faGithub}
                 className="text-gray-400 hover:text-teal-500 cursor-pointer text-2xl transition-colors duration-300"
               />
-            </a>
+            </a> */}
             <a
               href="https://www.linkedin.com/in/akshaykumar0611/"
               target="_blank"
@@ -50,12 +50,12 @@ const Footer = () => {
                 className="text-gray-400 hover:text-teal-500 cursor-pointer text-2xl transition-colors duration-300"
               />
             </a>
-            <a href="https://x.com/Aksh0605" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            {/* <a href="https://x.com/Aksh0605" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
               <FontAwesomeIcon
                 icon={faXTwitter}
                 className="text-gray-400 hover:text-teal-500 cursor-pointer text-2xl transition-colors duration-300"
               />
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
